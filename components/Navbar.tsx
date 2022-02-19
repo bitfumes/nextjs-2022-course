@@ -3,16 +3,16 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <>
+    <div className="bg-stone-700 text-white p-4">
       <Link href="/">
-        <a className="mx-2 underline">Home</a>
+        <a className="mx-2 hover:underline">Home</a>
       </Link>
       <Link href="/about">
-        <a className="mx-2 underline">About</a>
+        <a className="mx-2 hover:underline">About</a>
       </Link>
       <Link href="/contact">
-        <a className="mx-2 underline">Contact</a>
+        <a className="mx-2 hover:underline">Contact</a>
       </Link>
-    </>
+    </div>
   );
 }
