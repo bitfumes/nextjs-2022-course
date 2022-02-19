@@ -5,13 +5,13 @@ export default function Navbar() {
   return (
     <>
       <Link href="/">
-        <a>Home</a>
+        <a className="mx-2 underline">Home</a>
       </Link>
       <Link href="/about">
-        <a>About</a>
+        <a className="mx-2 underline">About</a>
       </Link>
       <Link href="/contact">
-        <a>Contact</a>
+        <a className="mx-2 underline">Contact</a>
       </Link>
     </>
   );
