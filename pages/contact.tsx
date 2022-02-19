@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-export default function About() {
+export default function Contact() {
   return (
     <nav>
       <Link href="/">
@@ -13,7 +13,7 @@ export default function About() {
       <Link href="/contact">
         <a>Contact</a>
       </Link>
-      <div>About</div>
+      <div>Contact</div>
     </nav>
   );
 }
