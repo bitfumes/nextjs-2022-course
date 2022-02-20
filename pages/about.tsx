@@ -1,10 +1,13 @@
+import { NextPage } from "next";
 import React from "react";
 import Layout from "../components/Layout";
 
-export default function About() {
+const About: NextPage = () => {
   return (
     <Layout>
       <div>About</div>
     </Layout>
   );
-}
+};
+
+export default About;
