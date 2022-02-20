@@ -7,6 +7,9 @@ export default function Navbar() {
       <Link href="/">
         <a className="mx-2 hover:underline">Home</a>
       </Link>
+      <Link href="/sneakers">
+        <a className="mx-2 hover:underline">Sneakers</a>
+      </Link>
       <Link href="/about">
         <a className="mx-2 hover:underline">About</a>
       </Link>
