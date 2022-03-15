@@ -20,20 +20,30 @@ const sneakers = [
 const Sneakers: NextPage = () => {
   return (
     <Layout>
-      <div>
-        {sneakers.map((sneaker) => (
-          <div key={sneaker.name}>
-            <p>{sneaker.name}</p>
-            <Image
-              src={sneaker.image}
-              alt={sneaker.name}
-              width="200"
-              height="200"
-              className="rounded-lg shadow-md"
-            />
-          </div>
-        ))}
-      </div>
+      <>
+        <div>
+          <select name="" id="">
+            <option value="">All</option>
+            <option value="">Nike</option>
+            <option value="">Addidas</option>
+          </select>
+        </div>
+
+        <div className="grid grid-cols-4 gap-4">
+          {sneakers.map((sneaker) => (
+            <div key={sneaker.name} className="text-center">
+              <Image
+                src={sneaker.image}
+                alt={sneaker.name}
+                width="200"
+                height="200"
+                className="rounded-lg shadow-md"
+              />
+              <p className="font-semibold">{sneaker.name}</p>
+            </div>
+          ))}
+        </div>
+      </>
     </Layout>
   );
 };
