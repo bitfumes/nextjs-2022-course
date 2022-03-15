@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
+import Image from "next/image";
 import React from "react";
 import Layout from "../components/Layout";
 
@@ -23,7 +24,13 @@ const Sneakers: NextPage = () => {
         {sneakers.map((sneaker) => (
           <div key={sneaker.name}>
             <p>{sneaker.name}</p>
-            <img src={sneaker.image} alt={sneaker.name} width="250" />
+            <Image
+              src={sneaker.image}
+              alt={sneaker.name}
+              width="200"
+              height="200"
+              className="rounded-lg shadow-md"
+            />
           </div>
         ))}
       </div>
