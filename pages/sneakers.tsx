@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import Image from "next/image";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import Layout from "../components/Layout";
 
-const sneakers = [
+const allSneakers = [
   {
     name: "Nike",
     image:
@@ -18,14 +18,24 @@ const sneakers = [
 ];
 
 const Sneakers: NextPage = () => {
+  const [sneakers, setsneakers] = useState(allSneakers);
+
+  function filterSneakers(e: ChangeEvent<HTMLSelectElement>) {
+    const selectedBrand = e.target.value;
+    const filtered = allSneakers.filter(
+      (sneaker) => sneaker.name === selectedBrand
+    );
+    setsneakers(filtered);
+  }
+
   return (
     <Layout>
       <>
         <div>
-          <select name="" id="">
+          <select onChange={filterSneakers}>
             <option value="">All</option>
-            <option value="">Nike</option>
-            <option value="">Addidas</option>
+            <option value="Nike">Nike</option>
+            <option value="Addidas">Addidas</option>
           </select>
         </div>
 
