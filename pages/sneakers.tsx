@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
+import FilterSneaker from "../components/sneakers/FilterSneaker";
 
 const allSneakers = [
   {
@@ -19,6 +20,11 @@ const allSneakers = [
 
 const Sneakers: NextPage = () => {
   const [sneakers, setsneakers] = useState(allSneakers);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+  function isSelected(brand: string) {
+    return selectedBrands.includes(brand);
+  }
 
   function filterSneakers() {
     let result = allSneakers;
@@ -30,17 +36,6 @@ const Sneakers: NextPage = () => {
     setsneakers(result);
   }
 
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-
-  function filterBy(brand: string) {
-    if (isSelected(brand)) return;
-    setSelectedBrands([...selectedBrands, brand]);
-  }
-
-  function isSelected(brand: string) {
-    return selectedBrands.includes(brand);
-  }
-
   useEffect(() => {
     filterSneakers();
   }, [selectedBrands]);
@@ -48,25 +43,11 @@ const Sneakers: NextPage = () => {
   return (
     <Layout>
       <>
-        <div className="p-2 text-sm">
-          <button className="border rounded-md px-2 py-1">Filter</button>
-          <span className="ml-8">
-            <button onClick={() => filterBy("Nike")} className="mx-4">
-              {isSelected("Nike") && <span className="mr-2">x</span>}
-              Nike
-            </button>
-
-            <button onClick={() => filterBy("Addidas")} className="mx-4">
-              {isSelected("Addidas") && <span className="mr-2">x</span>}
-              Addidas
-            </button>
-          </span>
-          {/* <select multiple onChange={filterSneakers}>
-            <option value="">All</option>
-            <option value="Nike">Nike</option>
-            <option value="Addidas">Addidas</option>
-          </select> */}
-        </div>
+        <FilterSneaker
+          isSelected={isSelected}
+          selectedBrands={selectedBrands}
+          setSelectedBrands={setSelectedBrands}
+        />
 
         <div className="grid grid-cols-4 gap-4">
           {sneakers.map((sneaker) => (
