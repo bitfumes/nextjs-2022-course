@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 
 const allSneakers = [
@@ -20,19 +20,18 @@ const allSneakers = [
 const Sneakers: NextPage = () => {
   const [sneakers, setsneakers] = useState(allSneakers);
 
-  function filterSneakers(e: ChangeEvent<HTMLSelectElement>) {
-    const selectedBrand = e.target.value;
-
+  function filterSneakers() {
     let result = allSneakers;
 
-    if (selectedBrand) {
-      result = allSneakers.filter((sneaker) => sneaker.name === selectedBrand);
+    if (selectedBrands.length > 0) {
+      result = allSneakers.filter((sneaker) => isSelected(sneaker.name));
     }
 
     setsneakers(result);
   }
 
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
   function filterBy(brand: string) {
     if (isSelected(brand)) return;
     setSelectedBrands([...selectedBrands, brand]);
@@ -41,6 +40,10 @@ const Sneakers: NextPage = () => {
   function isSelected(brand: string) {
     return selectedBrands.includes(brand);
   }
+
+  useEffect(() => {
+    filterSneakers();
+  }, [selectedBrands]);
 
   return (
     <Layout>
@@ -52,6 +55,7 @@ const Sneakers: NextPage = () => {
               {isSelected("Nike") && <span className="mr-2">x</span>}
               Nike
             </button>
+
             <button onClick={() => filterBy("Addidas")} className="mx-4">
               {isSelected("Addidas") && <span className="mr-2">x</span>}
               Addidas
