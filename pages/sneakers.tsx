@@ -22,17 +22,21 @@ const Sneakers: NextPage = () => {
 
   function filterSneakers(e: ChangeEvent<HTMLSelectElement>) {
     const selectedBrand = e.target.value;
-    const filtered = allSneakers.filter(
-      (sneaker) => sneaker.name === selectedBrand
-    );
-    setsneakers(filtered);
+
+    let result = allSneakers;
+
+    if (selectedBrand) {
+      result = allSneakers.filter((sneaker) => sneaker.name === selectedBrand);
+    }
+
+    setsneakers(result);
   }
 
   return (
     <Layout>
       <>
         <div>
-          <select onChange={filterSneakers}>
+          <select multiple onChange={filterSneakers}>
             <option value="">All</option>
             <option value="Nike">Nike</option>
             <option value="Addidas">Addidas</option>
