@@ -12,7 +12,14 @@ export default function FilterSneaker({
   setSelectedBrands,
 }: Props) {
   function filterBy(brand: string) {
-    if (isSelected(brand)) return;
+    isSelected(brand) ? unSelectBrand(brand) : selectBrand(brand);
+  }
+
+  function unSelectBrand(brand: string) {
+    setSelectedBrands(selectedBrands.filter((_brand) => _brand !== brand));
+  }
+
+  function selectBrand(brand: string) {
     setSelectedBrands([...selectedBrands, brand]);
   }
 
