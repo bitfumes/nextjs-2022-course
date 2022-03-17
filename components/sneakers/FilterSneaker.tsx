@@ -15,9 +15,10 @@ export default function FilterSneaker({
   const { query } = useRouter();
 
   useEffect(() => {
-    const filterBrands = query.filter;
-    if (filterBrands) {
-      selectBrand(filterBrands);
+    const queryBrands = query.filter as string;
+    if (queryBrands) {
+      const filterBrands: string[] = queryBrands.split(",");
+      filterBrands.map((_brand) => selectBrand(_brand));
     }
   }, [query]);
 
@@ -30,7 +31,7 @@ export default function FilterSneaker({
   }
 
   function selectBrand(brand: string) {
-    setSelectedBrands([...selectedBrands, brand]);
+    setSelectedBrands((prevSelectedBrands) => [...prevSelectedBrands, brand]);
   }
 
   return (
