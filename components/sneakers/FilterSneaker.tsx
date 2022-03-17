@@ -21,7 +21,9 @@ export default function FilterSneaker({
     const queryBrands = query.filter as string;
     if (queryBrands) {
       const filterBrands: string[] = queryBrands.split(",");
-      filterBrands.map((_brand) => selectBrand(_brand));
+      filterBrands.map((_brand) =>
+        setSelectedBrands((prev: string[]) => [...prev, _brand])
+      );
     }
   }, [query]);
 
@@ -41,6 +43,12 @@ export default function FilterSneaker({
   }
 
   function selectBrand(brand: string) {
+    const queryBrands = query.filter as string;
+    const newQuery = queryBrands
+      ? queryBrands.split(",").concat([brand]).join(",")
+      : brand;
+
+    push({ query: { filter: newQuery } });
     setSelectedBrands((prev: string[]) => [...prev, brand]);
   }
 
