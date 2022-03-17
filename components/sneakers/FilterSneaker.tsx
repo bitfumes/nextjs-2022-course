@@ -1,4 +1,5 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 type Props = {
   isSelected: Function;
@@ -11,6 +12,15 @@ export default function FilterSneaker({
   selectedBrands,
   setSelectedBrands,
 }: Props) {
+  const { query } = useRouter();
+
+  useEffect(() => {
+    const filterBrands = query.filter;
+    if (filterBrands) {
+      selectBrand(filterBrands);
+    }
+  }, [query]);
+
   function filterBy(brand: string) {
     isSelected(brand) ? unSelectBrand(brand) : selectBrand(brand);
   }
