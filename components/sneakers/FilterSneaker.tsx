@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BrandFilterButton from "./BrandFilterButton";
 
 type Props = {
@@ -16,14 +16,19 @@ export default function FilterSneaker({
   setSelectedBrands,
 }: Props) {
   const { query, push } = useRouter();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const queryBrands = query.filter as string;
     if (queryBrands) {
+      // Apply filter from query
       const filterBrands: string[] = queryBrands.split(",");
       filterBrands.map((_brand) =>
         setSelectedBrands((prev: string[]) => [...prev, _brand])
       );
+
+      // Set show filters
+      setShow(true);
     }
   }, [query]);
 
@@ -52,19 +57,28 @@ export default function FilterSneaker({
     setSelectedBrands((prev: string[]) => [...prev, brand]);
   }
 
+  function showFilters() {
+    setShow(!show);
+  }
+
   return (
     <div className="p-4 mb-4 border-b text-xs">
-      <button className="border rounded-md px-2 py-1">Filter</button>
-      <span className="ml-8">
-        {brands.map((brand: string) => (
-          <BrandFilterButton
-            key={brand}
-            filterBy={filterBy}
-            brand={brand}
-            isSelected={isSelected}
-          />
-        ))}
-      </span>
+      <button onClick={showFilters} className="border rounded-md px-2 py-1">
+        Filters
+      </button>
+
+      {show && (
+        <span className="ml-8">
+          {brands.map((brand: string) => (
+            <BrandFilterButton
+              key={brand}
+              filterBy={filterBy}
+              brand={brand}
+              isSelected={isSelected}
+            />
+          ))}
+        </span>
+      )}
     </div>
   );
 }
