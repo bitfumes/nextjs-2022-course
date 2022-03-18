@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 const Sneakers: NextPage = () => {
   const [sneakers, setsneakers] = useState(db);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  console.log(db);
 
   function isSelected(brand: string) {
     return selectedBrands.includes(brand);
