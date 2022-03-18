@@ -1,36 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
+import Layout from "components/Layout";
+import FilterSneaker from "components/sneakers/FilterSneaker";
+import db from "db.json";
 import { NextPage } from "next";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import FilterSneaker from "../components/sneakers/FilterSneaker";
-
-const allSneakers = [
-  {
-    name: "Nike",
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-  },
-  {
-    name: "Addidas",
-    image:
-      "https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-  },
-];
 
 const Sneakers: NextPage = () => {
-  const [sneakers, setsneakers] = useState(allSneakers);
+  const [sneakers, setsneakers] = useState(db);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  console.log(db);
 
   function isSelected(brand: string) {
     return selectedBrands.includes(brand);
   }
 
   function filterSneakers() {
-    let result = allSneakers;
+    let result = db;
 
     if (selectedBrands.length > 0) {
-      result = allSneakers.filter((sneaker) => isSelected(sneaker.name));
+      result = db.filter((sneaker) => isSelected(sneaker.name));
     }
 
     setsneakers(result);
@@ -51,9 +40,12 @@ const Sneakers: NextPage = () => {
 
         <div className="grid grid-cols-4 gap-4">
           {sneakers.map((sneaker) => (
-            <div key={sneaker.name} className="text-center">
+            <div
+              key={sneaker.name}
+              className="text-center border rounded-md shadow-sm hover:shadow-md cursor-pointer"
+            >
               <Image
-                src={sneaker.image}
+                src={sneaker.image.thumbnail}
                 alt={sneaker.name}
                 width="200"
                 height="200"
