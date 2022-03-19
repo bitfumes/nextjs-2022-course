@@ -1,5 +1,4 @@
 import Layout from "components/Layout";
-import db from "db.json";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -9,8 +8,11 @@ export default function Sneaker() {
   const [sneaker, setSneaker] = useState<any>({});
 
   useEffect(() => {
-    const result = db.find((_sneaker) => _sneaker._id === query.sneaker_id);
-    setSneaker(result);
+    if (query.sneaker_id) {
+      fetch(`/api/sneakers/${query.sneaker_id}`)
+        .then((res) => res.json())
+        .then((result) => setSneaker(result));
+    }
   }, [query]);
 
   return (
