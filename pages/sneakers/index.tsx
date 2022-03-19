@@ -1,12 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "components/Layout";
 import ShowSneakers from "components/ShowSneakers";
-import db from "db.json";
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Sneakers: NextPage = () => {
-  const [sneakers, setsneakers] = useState(db);
+  const [sneakers, setsneakers] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/sneakers")
+      .then((res) => res.json())
+      .then((result) => setsneakers(result));
+  }, []);
 
   return (
     <Layout>
