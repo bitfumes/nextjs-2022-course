@@ -11,5 +11,9 @@ export default function handler(
 ) {
   const { _id } = req.query;
   const result = db.find((_sneaker) => _sneaker._id === _id);
-  res.status(200).json(result);
+  if (!result) {
+    res.status(404).json({ error: "Invalid sneaker id" });
+  } else {
+    res.status(200).json(result);
+  }
 }
