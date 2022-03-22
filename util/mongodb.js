@@ -6,6 +6,7 @@ const databaseName = "nextjs";
 export default async function connect() {
   const client = await MongoClient.connect(uri);
   const db = await client.db(databaseName);
+  console.log("reaching client");
 
   return db;
 }
