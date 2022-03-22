@@ -1,4 +1,3 @@
-import db from "db.json";
 import React, { useEffect, useState } from "react";
 import SneakerCard from "./SneakerCard";
 import FilterSneaker from "./sneakers/FilterSneaker";
@@ -11,13 +10,11 @@ export default function ShowSneakers({ sneakers, setsneakers }: any) {
   }
 
   function filterSneakers() {
-    let result = db;
-
-    if (selectedBrands.length > 0) {
-      result = db.filter((sneaker: any) => isSelected(sneaker.name));
-    }
-
-    setsneakers(result);
+    // let result = db;
+    // if (selectedBrands.length > 0) {
+    //   result = db.filter((sneaker: any) => isSelected(sneaker.name));
+    // }
+    // setsneakers(result);
   }
 
   useEffect(() => {
