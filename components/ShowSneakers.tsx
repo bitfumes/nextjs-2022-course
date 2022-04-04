@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Sneaker } from "types/sneakers";
 import SneakerCard from "./SneakerCard";
 import FilterSneaker from "./sneakers/FilterSneaker";
 
-export default function ShowSneakers({ sneakers, setsneakers }: any) {
+type PropType = {
+  sneakers: Sneaker[];
+  setsneakers: Function;
+};
+
+export default function ShowSneakers({ sneakers, setsneakers }: PropType) {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 
   function isSelected(brand: string) {
