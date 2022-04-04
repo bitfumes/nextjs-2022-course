@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import connectToDatabase from "util/mongodb";
 
 type Data = {
-  name: string;
+  error: string;
 };
 
 export default async function handler(

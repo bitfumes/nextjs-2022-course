@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 
 const Sneakers: NextPage = () => {
-  const [sneakers, setsneakers] = useState([]);
+  const [sneakers, setsneakers] = useState<string[]>([]);
 
   useEffect(() => {
     fetch("/api/sneakers")
