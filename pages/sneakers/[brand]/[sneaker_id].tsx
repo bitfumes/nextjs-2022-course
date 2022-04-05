@@ -6,7 +6,7 @@ import { Sneaker as SneakerType } from "types/sneakers";
 
 export default function Sneaker() {
   const { query } = useRouter();
-  const [sneaker, setSneaker] = useState<any>({});
+  const [sneaker, setSneaker] = useState<SneakerType>();
 
   useEffect(() => {
     if (query.sneaker_id) {
@@ -18,7 +18,7 @@ export default function Sneaker() {
 
   return (
     <Layout>
-      {sneaker?.name && (
+      {!!sneaker ? (
         <div className="grid grid-cols-2 gap-4">
           <Image
             src={sneaker?.image?.original}
@@ -28,8 +28,8 @@ export default function Sneaker() {
             alt={sneaker.name}
           />
           <div>
-            <p className="text-2xl text-gray-600">Brand: {sneaker?.brand}</p>
-            <p className="text-3xl mt-4">{sneaker?.name}</p>
+            <p className="text-2xl text-gray-600">Brand: {sneaker.brand}</p>
+            <p className="text-3xl mt-4">{sneaker.name}</p>
 
             {sneaker?.story && (
               <div className="text-gray-600 my-4">
@@ -53,6 +53,8 @@ export default function Sneaker() {
             </div>
           </div>
         </div>
+      ) : (
+        <p>Loading...</p>
       )}
     </Layout>
   );

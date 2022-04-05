@@ -36,7 +36,7 @@ export default function ShowSneakers({ sneakers, setsneakers }: PropType) {
       />
 
       <div className="grid grid-cols-4 gap-4">
-        {sneakers.map((sneaker: any) => (
+        {sneakers.map((sneaker) => (
           <SneakerCard key={sneaker._id} sneaker={sneaker} />
         ))}
       </div>
