@@ -11,7 +11,7 @@ const Sneakers: NextPage = () => {
   useEffect(() => {
     fetch("/api/sneakers")
       .then((res) => res.json())
-      .then((result) => setsneakers(result));
+      .then((result: Sneaker[]) => setsneakers(result));
   }, []);
 
   return (

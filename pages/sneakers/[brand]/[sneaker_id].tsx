@@ -2,6 +2,7 @@ import Layout from "components/Layout";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { Sneaker as SneakerType } from "types/sneakers";
 
 export default function Sneaker() {
   const { query } = useRouter();
@@ -11,7 +12,7 @@ export default function Sneaker() {
     if (query.sneaker_id) {
       fetch(`/api/sneakers/${query.sneaker_id}`)
         .then((res) => res.json())
-        .then((result) => setSneaker(result));
+        .then((result: { data: SneakerType }) => setSneaker(result.data));
     }
   }, [query]);
 
