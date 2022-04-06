@@ -1,18 +1,20 @@
 import Layout from "components/Layout";
 import ShowSneakers from "components/ShowSneakers";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Sneaker } from "types/sneakers";
 
 export default function Brand() {
-  const router = useRouter();
+  const { query } = useRouter();
   const [sneakers, setSneakers] = useState<any>([]);
 
-  // useEffect(() => {
-  //   const filteredDB = db.filter(
-  //     (sneaker) => sneaker.brand.toLocaleLowerCase() === router.query.brand
-  //   );
-  //   setSneakers(filteredDB);
-  // }, [router.query]);
+  useEffect(() => {
+    if (!query.brand) return;
+
+    fetch(`/api/sneakers?brand=${query.brand}`)
+      .then((res) => res.json())
+      .then((result: Sneaker[]) => setSneakers(result));
+  }, [query]);
 
   return (
     <Layout>
