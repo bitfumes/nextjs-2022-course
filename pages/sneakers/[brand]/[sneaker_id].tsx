@@ -1,5 +1,6 @@
 import Layout from "components/Layout";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Sneaker as SneakerType } from "types/sneakers";
@@ -28,7 +29,12 @@ export default function Sneaker() {
             alt={sneaker.name}
           />
           <div>
-            <p className="text-2xl text-gray-600">Brand: {sneaker.brand}</p>
+            <p className="text-2xl text-gray-600">
+              Brand:
+              <Link href={`/sneakers/${sneaker.brand}`}>
+                <a className="underline ml-2">{sneaker.brand}</a>
+              </Link>
+            </p>
             <p className="text-3xl mt-4">{sneaker.name}</p>
 
             {sneaker?.story && (

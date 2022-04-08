@@ -8,10 +8,14 @@ export default async function handler(
   res: NextApiResponse<Sneaker[]>
 ) {
   const _db = await connectToDatabase();
-  const brand = req.query.brand;
+  const brand = req.query.brand as string;
   let sneakers: Sneaker[] = [];
   if (brand) {
-    sneakers = await _db.collection("sneakers").find({ brand }).toArray();
+    sneakers = await _db
+      .collection("sneakers")
+      .find({ brand: brand.toLowerCase() })
+      .collation({ strength: 2, locale: "en" })
+      .toArray();
   } else {
     sneakers = await _db.collection("sneakers").find().toArray();
   }
