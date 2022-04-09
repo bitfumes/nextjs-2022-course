@@ -5,22 +5,27 @@ import FilterSneaker from "./sneakers/FilterSneaker";
 
 type PropType = {
   sneakers: Sneaker[];
-  setsneakers: Function;
 };
 
-export default function ShowSneakers({ sneakers, setsneakers }: PropType) {
+export default function ShowSneakers({ sneakers }: PropType) {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [filtered, setFiltered] = useState(sneakers);
+
+  useEffect(() => {
+    setFiltered(sneakers);
+  }, [sneakers]);
 
   function isSelected(brand: string) {
+    brand = brand.toLowerCase();
     return selectedBrands.includes(brand);
   }
 
   function filterSneakers() {
-    // let result = db;
-    // if (selectedBrands.length > 0) {
-    //   result = db.filter((sneaker: any) => isSelected(sneaker.name));
-    // }
-    // setsneakers(result);
+    let result = sneakers;
+    if (selectedBrands.length > 0) {
+      result = result.filter((sneaker: Sneaker) => isSelected(sneaker.brand));
+    }
+    setFiltered(result);
   }
 
   useEffect(() => {
@@ -36,7 +41,7 @@ export default function ShowSneakers({ sneakers, setsneakers }: PropType) {
       />
 
       <div className="grid grid-cols-4 gap-4">
-        {sneakers.map((sneaker) => (
+        {filtered.map((sneaker) => (
           <SneakerCard key={sneaker._id} sneaker={sneaker} />
         ))}
       </div>

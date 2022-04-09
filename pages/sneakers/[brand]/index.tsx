@@ -18,7 +18,7 @@ export default function Brand() {
 
   return (
     <Layout>
-      <ShowSneakers sneakers={sneakers} setsneakers={setSneakers} />
+      <ShowSneakers sneakers={sneakers} />
     </Layout>
   );
 }

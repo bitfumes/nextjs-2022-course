@@ -8,7 +8,7 @@ type Props = {
   setSelectedBrands: Function;
 };
 
-const brands = ["Nike", "Addidas"];
+const brands = ["Nike", "Adidas"];
 
 export default function FilterSneaker({
   isSelected,
@@ -37,6 +37,7 @@ export default function FilterSneaker({
   }
 
   function unSelectBrand(brand: string) {
+    brand = brand.toLowerCase();
     const queryBrands = query.filter as string;
     const newQuery = queryBrands
       .split(",")
@@ -48,6 +49,7 @@ export default function FilterSneaker({
   }
 
   function selectBrand(brand: string) {
+    brand = brand.toLowerCase();
     const queryBrands = query.filter as string;
     const newQuery = queryBrands
       ? queryBrands.split(",").concat([brand]).join(",")
