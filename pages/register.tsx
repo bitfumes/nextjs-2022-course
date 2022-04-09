@@ -2,12 +2,12 @@ import { NextPage } from "next";
 import React from "react";
 import Layout from "../components/Layout";
 
-const About: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <Layout>
-      <div>About</div>
+      <div>Register</div>
     </Layout>
   );
 };
 
-export default About;
+export default Register;
