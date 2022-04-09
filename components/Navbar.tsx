@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
@@ -14,7 +14,10 @@ export default function Navbar() {
         <a className="mx-2 hover:underline">Sneakers</a>
       </Link>
       {session && (
-        <button className="mx-2 float-right cursor-pointer hover:underline">
+        <button
+          onClick={() => signOut()}
+          className="mx-2 float-right cursor-pointer hover:underline"
+        >
           Logout
         </button>
       )}
