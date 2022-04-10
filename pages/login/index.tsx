@@ -1,7 +1,22 @@
 import Layout from "components/Layout";
 import { signIn } from "next-auth/react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function Login() {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  function credentialLogin(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    signIn("credentials", form);
+  }
+
+  function handleInput(e: ChangeEvent<HTMLInputElement>) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
   return (
     <Layout>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -13,7 +28,7 @@ export default function Login() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={credentialLogin}>
               <div>
                 <label
                   htmlFor="email"
@@ -26,7 +41,8 @@ export default function Login() {
                     id="email"
                     name="email"
                     type="email"
-                    autoComplete="email"
+                    value={form.email}
+                    onChange={handleInput}
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
@@ -45,7 +61,8 @@ export default function Login() {
                     id="password"
                     name="password"
                     type="password"
-                    autoComplete="current-password"
+                    value={form.password}
+                    onChange={handleInput}
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
