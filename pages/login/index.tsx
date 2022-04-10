@@ -1,5 +1,6 @@
 import Layout from "components/Layout";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function Login() {
@@ -7,6 +8,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  const { query } = useRouter();
 
   function credentialLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -28,6 +31,11 @@ export default function Login() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            {query?.error && (
+              <p className="text-red-700 text-center">
+                Credentials doest not match out record
+              </p>
+            )}
             <form className="space-y-6" onSubmit={credentialLogin}>
               <div>
                 <label

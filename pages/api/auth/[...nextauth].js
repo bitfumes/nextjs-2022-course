@@ -29,9 +29,12 @@ export default NextAuth({
           email: "sarthak@mezohub.com",
           name: "Sarthak",
         };
-        // return user;
+        return user;
         return null;
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
 });
