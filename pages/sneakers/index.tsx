@@ -14,7 +14,7 @@ const Sneakers: NextPage<{ sneakers: Sneaker[] }> = ({ sneakers }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const data = await fetch("http://localhost:3000/api/sneakers");
+  const data = await fetch(`${process.env.APP_URL}/api/sneakers`);
   const results = await data.json();
 
   return {

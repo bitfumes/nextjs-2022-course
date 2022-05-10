@@ -1,22 +1,11 @@
 import Layout from "components/Layout";
+import { GetServerSidePropsContext } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Sneaker as SneakerType } from "types/sneakers";
 
-export default function Sneaker() {
-  const { query } = useRouter();
-  const [sneaker, setSneaker] = useState<SneakerType>();
-
-  useEffect(() => {
-    if (query.sneaker_id) {
-      fetch(`/api/sneakers/${query.sneaker_id}`)
-        .then((res) => res.json())
-        .then((result: { data: SneakerType }) => setSneaker(result.data));
-    }
-  }, [query]);
-
+export default function Sneaker({ sneaker }: { sneaker: SneakerType }) {
   return (
     <Layout>
       {!!sneaker ? (
@@ -64,4 +53,13 @@ export default function Sneaker() {
       )}
     </Layout>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const data = await fetch(
+    `${process.env.APP_URL}/api/sneakers/${context.query.sneaker_id}`
+  );
+  const result = await data.json();
+
+  return { props: { sneaker: result.data } };
 }
